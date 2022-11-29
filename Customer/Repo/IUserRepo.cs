@@ -6,6 +6,5 @@ namespace Customer.Repo
     {
         public Task<User> GetUserById(int userId);
         public Task<User> GetUserByEmail(string email);
-        public Task<User> GetRoleById(int userId);
     }
 }

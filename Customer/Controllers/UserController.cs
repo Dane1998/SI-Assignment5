@@ -28,13 +28,6 @@ namespace Customer.Controllers
             var result = await _userRepo.GetUserByEmail(email);
             return Ok(result);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> GetRoleById(int userId)
-        {
-            var result = await _userRepo.GetRoleById(userId);
-            return Ok(result);
-        }
     }
 }
 

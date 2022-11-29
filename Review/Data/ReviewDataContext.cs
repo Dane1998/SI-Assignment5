@@ -14,7 +14,7 @@ namespace Review.Data
             modelbuilder.UseSerialColumns();
         }
 
-        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Reviews> Reviews { get; set; }
 
     }
 }

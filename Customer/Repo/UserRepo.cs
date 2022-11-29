@@ -13,11 +13,6 @@ namespace Customer.Repo
             _db = db;
         }
 
-        public async Task<User> GetRoleById(int userId)
-        {
-            return await _db.Users.FirstOrDefaultAsync(x => x.RoleId == userId);
-        }
-
         public async Task<User> GetUserByEmail(string email)
         {
             return await _db.Users.FirstOrDefaultAsync(x => x.EmailAddress == email);

@@ -25,7 +25,7 @@ namespace Review.Repo
 
         public async Task<List<Reviews>> GetReviewsByUserId(int userId)
         {
-            return _db.Reviews.Where(x => x.userId == userId).ToList();
+            return _db.Reviews.Where(x => x.UserId == userId).ToList();
         }
     }
 }
