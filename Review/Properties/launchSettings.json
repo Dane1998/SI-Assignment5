@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "ReviewAPI": {
+    "Review": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

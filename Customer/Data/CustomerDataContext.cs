@@ -2,10 +2,10 @@
 
 namespace Customer.Data
 {
-    public class DataContext : DbContext
+    public class CustomerDataContext : DbContext
     {
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public CustomerDataContext(DbContextOptions<CustomerDataContext> options) : base(options)
         {
             
         }

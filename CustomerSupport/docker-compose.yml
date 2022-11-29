@@ -49,7 +49,7 @@ services:
         POSTGRES_USER: ${POSTGRES_USER:-postgres}
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
      volumes:
-        - ./ReviewAPI:/review-data/postgres
+        - ./Review:/review-data/postgres
      ports:
         - "5433:5432"
      restart: unless-stopped

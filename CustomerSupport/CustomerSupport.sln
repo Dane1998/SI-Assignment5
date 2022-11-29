@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerSupport", "CustomerSupport.csproj", "{82F3339D-F75A-41D7-83AF-2E31CB5468DC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewAPI", "..\ReviewAPI\ReviewAPI.csproj", "{F84447F7-F518-480A-93EE-F133BCEF854F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Review", "..\Review\Review.csproj", "{F84447F7-F518-480A-93EE-F133BCEF854F}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2404E2BB-A8FD-4C02-85E1-DE0E43918ED4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer", "..\Customer\Customer.csproj", "{3A0CD780-1F87-428B-A82D-0540BC242B87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer", "..\Customer\Customer.csproj", "{3A0CD780-1F87-428B-A82D-0540BC242B87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
