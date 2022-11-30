@@ -1,5 +1,6 @@
 ﻿using Review.Data;
 using Review.Repo;
+using Shared.Shared;
 
 namespace Review.Services
 {
@@ -10,7 +11,7 @@ namespace Review.Services
 
     public class ReviewService : IReviewService
     {
-        private readonly IReviewRepo _reviewRepo;
+        private readonly IReviewRepo? _reviewRepo;
 
         public async Task<bool> SaveReview(ReviewDTO reviewDto)
         {

@@ -17,6 +17,9 @@ builder.Services.AddDbContext<ReviewDataContext>(
     o => o.UseNpgsql(builder.Configuration.GetConnectionString("Review"))
     );
 
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+                   options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 builder.Services.AddSingleton<IHostedService, ApacheKafkaConsumerService>();
 builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
 builder.Services.AddScoped<IReviewService, ReviewService>();

@@ -1,6 +1,7 @@
 ﻿using Review.Repo;
 using Microsoft.AspNetCore.Mvc;
 using Review.Data;
+using Newtonsoft.Json;
 
 namespace Review.Controllers
 {
@@ -15,21 +16,21 @@ namespace Review.Controllers
             _reviewRepo = reviewRepo;
         }
 
-        [HttpPost]
+        [HttpPost("CreateReview")]
         public async Task<IActionResult> CreateReview(Reviews review)
         {
             var result = await _reviewRepo.CreateReview(review);
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("byReviewId")]
         public async Task<IActionResult> GetReviewByReviewId(int reviewId)
         {
             var result = await _reviewRepo.GetReviewByReviewId(reviewId);
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("byCustomerId")]
         public async Task<IActionResult> GetReviewsByCustomerId(int customerId)
         {
             var result = await _reviewRepo.GetReviewsByCustomerId(customerId);

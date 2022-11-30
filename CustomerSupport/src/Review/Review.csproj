@@ -8,6 +8,7 @@
     <DockerfileContext>..\..</DockerfileContext>
     <UserSecretsId>0ae36e6e-8a82-4ae6-9c88-b01e6dcbca8b</UserSecretsId>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />

@@ -2,7 +2,6 @@ using Customer.Data;
 using Customer.Repo;
 using Customer.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CustomerDataContext>(
     o => o.UseNpgsql(builder.Configuration.GetConnectionString("Customer"))
     );
+
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+                   options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddHttpContextAccessor();
 
