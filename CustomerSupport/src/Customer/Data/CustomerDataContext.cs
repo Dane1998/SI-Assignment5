@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Customer.Data
 {
@@ -10,12 +11,34 @@ namespace Customer.Data
             
         }
 
+        public DbSet<Customers> Customer { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             modelbuilder.UseSerialColumns();
-        }
-        public DbSet<User> Users { get; set; }
 
+            modelbuilder.Entity<Customers>().HasData(
+                new Customers()
+                {
+                    Id = 1,
+                    FirstName = "Jan",
+                    LastName = "Test",
+                    EmailAddress = "test@test.com",
+                    CreatedDate = DateTime.UtcNow
+                });
+
+            modelbuilder.Entity<Customers>().HasData(
+                new Customers()
+                {
+                    Id = 2,
+                    FirstName = "Thor",
+                    LastName = "Tester",
+                    EmailAddress = "test1@test.com",
+                    CreatedDate = DateTime.UtcNow
+                });
+        }
+        
+        
 
     }
 }

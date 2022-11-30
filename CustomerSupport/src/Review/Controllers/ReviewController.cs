@@ -30,9 +30,9 @@ namespace Review.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetReviewsByUserId(int userId)
+        public async Task<IActionResult> GetReviewsByCustomerId(int customerId)
         {
-            var result = await _reviewRepo.GetReviewsByUserId(userId);
+            var result = await _reviewRepo.GetReviewsByCustomerId(customerId);
             return Ok(result);
         }
     }

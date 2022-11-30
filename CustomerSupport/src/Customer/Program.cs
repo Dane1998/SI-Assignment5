@@ -1,5 +1,8 @@
 using Customer.Data;
+using Customer.Repo;
+using Customer.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +14,22 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<CustomerDataContext>(
-    o => o.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
+    o => o.UseNpgsql(builder.Configuration.GetConnectionString("Customer"))
     );
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
+builder.Services.AddScoped<IKafkaProducerService, KafkaProducerService>();
 
 var app = builder.Build();
 
-
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CustomerDataContext>();
+    db.Database.Migrate();
+    db.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

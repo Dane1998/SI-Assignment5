@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Review.Data;
+using Review.Repo;
+using Review.Services;
+using static Review.Services.ConsumerService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +14,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ReviewDataContext>(
-    o => o.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
+    o => o.UseNpgsql(builder.Configuration.GetConnectionString("Review"))
     );
+
+builder.Services.AddSingleton<IHostedService, ApacheKafkaConsumerService>();
+builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{ 
+    var db = scope.ServiceProvider.GetRequiredService<ReviewDataContext>();
+    db.Database.Migrate();
+    db.Database.EnsureCreated();
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

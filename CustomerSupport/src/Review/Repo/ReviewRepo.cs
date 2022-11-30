@@ -1,4 +1,5 @@
-﻿using Review.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Review.Data;
 
 namespace Review.Repo
 {
@@ -11,21 +12,22 @@ namespace Review.Repo
             _db = db;
         }
 
-        public async Task<Reviews> CreateReview(Reviews review)
+        public async Task<bool> CreateReview(Reviews review)
         {
             await _db.AddAsync(review);
             await _db.SaveChangesAsync();
-            return review;
+            return true;
         }
 
-        public async Task<Reviews> GetReviewByReviewId(int reviewId)
+        public async Task<Reviews?> GetReviewByReviewId(int reviewId)
         {
-            return _db.Reviews.FirstOrDefault(review => review.ReviewId == reviewId);
+                return await _db.Reviews.FirstOrDefaultAsync(review => review.Id == reviewId);
         }
 
-        public async Task<List<Reviews>> GetReviewsByUserId(int userId)
+        public Task<List<Reviews>> GetReviewsByCustomerId(int customerId)
         {
-            return _db.Reviews.Where(x => x.UserId == userId).ToList();
+            return _db.Reviews.Where(review => review.CustomerId == customerId).ToListAsync();
         }
+
     }
 }

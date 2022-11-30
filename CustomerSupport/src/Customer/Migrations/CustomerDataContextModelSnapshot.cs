@@ -22,13 +22,13 @@ namespace Customer.Migrations
 
             NpgsqlModelBuilderExtensions.UseSerialColumns(modelBuilder);
 
-            modelBuilder.Entity("Customer.Data.User", b =>
+            modelBuilder.Entity("Customer.Data.Customers", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseSerialColumn(b.Property<int>("UserId"));
+                    NpgsqlPropertyBuilderExtensions.UseSerialColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -45,19 +45,27 @@ namespace Customer.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("NormalizedEmail")
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("text");
+                    b.HasKey("Id");
 
-                    b.Property<string>("NormalizedUserName")
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("text");
+                    b.ToTable("Customer");
 
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2022, 11, 30, 15, 58, 21, 625, DateTimeKind.Utc).AddTicks(8932),
+                            EmailAddress = "test@test.com",
+                            FirstName = "Jan",
+                            LastName = "Test"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2022, 11, 30, 15, 58, 21, 625, DateTimeKind.Utc).AddTicks(8948),
+                            EmailAddress = "test1@test.com",
+                            FirstName = "Thor",
+                            LastName = "Tester"
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -1,11 +1,17 @@
 version: '3.4'
 
 services:
-  customersupport:
-    image: ${DOCKER_REGISTRY-}customersupport
+  customer:
+    image: ${DOCKER_REGISTRY-}customer
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: src/Customer/Dockerfile
+
+  review:
+    image: ${DOCKER_REGISTRY-}review
+    build:
+      context: .
+      dockerfile: src/Review/Dockerfile
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -30,26 +36,31 @@ services:
         KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
         KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1 
 
-  Customer:
+  init-kafka:
+    
+
+  PostgesCustomer:
     container_name: Customer
-    image: postgres:latest
+    image: postgres
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=Customerdb
     volumes:
        - ./Customer:/customer-data/postgres
     ports:
-      - "5432:5432"
+       - "5432:5432"
     restart: unless-stopped
 
-  Review:
-     container_name: Review
-     image: postgres:latest
-     environment:
-        POSTGRES_USER: ${POSTGRES_USER:-postgres}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-     volumes:
-        - ./Review:/review-data/postgres
-     ports:
-        - "5433:5432"
-     restart: unless-stopped
+  PostgesReview:
+    container_name: Review
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=Customerdb
+    volumes:
+       - ./Review:/review-data/postgres
+    ports:
+       - "5433:5433"
+    restart: unless-stopped
